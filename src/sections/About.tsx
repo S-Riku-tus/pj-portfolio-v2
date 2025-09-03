@@ -14,8 +14,7 @@ export default function About() {
               柴崎 陸<span className="roman">(shibasaki riku)</span>
             </h3>
             <p className="lead">
-              東京都葛飾区在住のAIエンジニア志望。生成AIの魅力に憑りつかれ、2024年より
-              プログラミング学習を開始。HTML/CSS/JS/React を学びながら日々スキルアップを図っています。
+              東京理科大学 先進工学研究科 電子システム工学専攻 1年。「CNNアンサンブル学習に基づく音響識別によるプール沸騰の発生検知」といったテーマで研究をしている。株式会社neoAIにて、LLM、画像生成周りの研究開発を行っている。
             </p>
           </div>
         </div>

@@ -31,7 +31,7 @@
     background: none; /* 背景は擬似要素に任せる */
   }
   
-  /* ★ フルスクリーン背景写真（固定） */
+  /*  フルスクリーン背景写真（固定） */
   body::before{
     content:"";
     position: fixed;
@@ -43,7 +43,7 @@
     will-change: transform;
   }
   
-  /* ★ 薄い白ベールで可読性UP（減らしたいなら不透明度を下げる） */
+  /* 薄い白ベールで可読性UP（減らしたいなら不透明度を下げる） */
   body::after{
     content:"";
     position: fixed;
@@ -64,7 +64,7 @@
     background: color-mix(in srgb, rgba(255,255,255,.85) 100%, transparent);
     backdrop-filter:saturate(1.1) blur(8px);
   }
-  .brand{font-weight:700; letter-spacing:.04em; text-decoration:none}
+  .brand{color: var(--fg); font-weight:700; letter-spacing:.04em; text-decoration:none}
   .brand-accent{color:var(--accent)}
   
   .hamburger{
@@ -74,7 +74,7 @@
   }
   .nav{display:flex; gap:12px; align-items:center}
   .nav a{
-    padding:8px 10px; text-decoration:none; border-radius:10px;
+    color: var(--fg); padding:8px 10px; text-decoration:none; border-radius:10px;
   }
   .nav a.is-active, .nav a:hover{
     background:var(--accent); color:var(--accent-ink);
@@ -110,7 +110,7 @@
   }
   .section-title::after{
     content:""; display:block; width:120px; height:4px; margin:12px auto 0;
-    background:var(--accent); border-radius:2px;
+    background:#a2e5ed; border-radius:2px;
   }
 
   /* =========================
@@ -128,7 +128,7 @@
   }
   .about-text{align-self:center}
   .about-name{font-size:clamp(22px,2.8vw,28px); margin:0 0 var(--space-4)}
-  .roman{font-weight:400; color:var(--muted); margin-left:8px}
+  .roman{font-weight:400; color: var(--fg); margin-left:8px}
   .lead{margin:0; color:#444}
   
   @media (max-width: 900px){
@@ -163,7 +163,46 @@
     .work-row, .work-row.reverse{ grid-template-columns: 1fr; }
     .work-image img{ max-width: 100%; }
   }
-  
+  /* ボタン（Service のリンク） */
+  .work-actions{
+    display:flex; gap:12px; margin-top: var(--space-6);
+    flex-wrap: wrap;
+  }
+  .btn{
+    display:inline-block;
+    padding:10px 16px;
+    border-radius:12px;
+    background: var(--accent);
+    color: var(--accent-ink);
+    text-decoration:none;
+    font-weight:700;
+  }
+  .btn:hover{ filter:brightness(.98) }
+
+  .btn-outline{
+    display:inline-block;
+    padding:10px 16px;
+    border-radius:12px;
+    border:1px solid var(--line);
+    background:#fff;
+    color: var(--fg);
+    text-decoration:none;
+  }
+  .btn-outline:hover{
+    background: color-mix(in srgb, #fff 90%, var(--accent) 10%);
+  }
+
+  /* 動画も画像と同じスケールで収まるように */
+  .work-image { display:flex; justify-content:center; }
+  .work-image img,
+  .work-image .work-video{
+    width: 100%;
+    max-width: clamp(450px, 50vw, 600px);
+    max-height: 300px;
+    border-radius:12px;
+    box-shadow:0 10px 40px rgba(0,0,0,.10);
+  }
+
   /* ===== Skill ===== */
   .skill-grid{
     display:grid; grid-template-columns: repeat(3, 1fr);
@@ -207,7 +246,8 @@
   .timeline-year{font-weight:700}
   .timeline-dot{
     width:14px; height:14px; border-radius:50%;
-    background:var(--accent); margin-top:4px;
+    background:var(--fg); margin-top:4px;
+    box-shadow: 0 0 0 3px rgba(15,23,42,.08);
   }
   .timeline-text{color:#444}
   @media (max-width: 600px){

@@ -1,3 +1,4 @@
+// src/sections/History.tsx
 const ITEMS = [
     { year: "2025", text: "React / TypeScript を中心にフロントエンドを強化中。就活ポートフォリオを構築。" },
     { year: "2024", text: "学習を継続し、複数の小規模プロジェクトを公開。" },
@@ -9,14 +10,16 @@ const ITEMS = [
     return (
       <section id="history" className="section">
         <h2 className="section-title">History</h2>
-        <div className="container timeline">
-          {ITEMS.map((it) => (
-            <div className="timeline-item" key={it.year}>
-              <div className="timeline-year">{it.year}</div>
-              <div className="timeline-dot" />
-              <div className="timeline-text">{it.text}</div>
-            </div>
-          ))}
+        <div className="container">
+          <div className="timeline">
+            {ITEMS.map((it) => (
+              <div className="timeline-item" key={it.year}>
+                <div className="timeline-year">{it.year}</div>
+                <div className="timeline-dot" />
+                <div className="timeline-text">{it.text}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     );

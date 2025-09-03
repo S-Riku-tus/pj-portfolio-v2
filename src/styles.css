@@ -2,29 +2,55 @@
    Tokens / Base
    ========================= */
    :root{
-    --bg:#ffffff;
     --fg:#1a1a1a;
     --muted:#6b7280;
     --line:#e6e6e6;
-    /* 淡いアクセント色：お好みで変更可 */
+  
+    /* アクセント（淡色）：お好みで変更OK */
     --accent:#8BD3DD;
     --accent-ink:#0e3b40;
   
+    /* 余白・角丸・横幅コントロール */
     --space-2:8px; --space-3:12px; --space-4:16px;
     --space-6:24px; --space-8:32px; --space-12:48px; --space-16:64px;
     --radius:16px;
-    --max-w:1120px;
+  
+    /* 横幅を絞る：ここで全体の読み幅を決める */
+    --content-max: 880px;                         /* 以前:1120px → 880px に縮小 */
+    --page-pad: clamp(20px, 6vw, 56px);           /* 左右の内側余白を常に確保 */
+  
     --header-h:64px;
   }
   
+  /* ベース */
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{
-    margin:0; color:var(--fg); background:var(--bg);
+    margin:0; color:var(--fg);
     font:16px/1.8 "Noto Sans JP",system-ui,-apple-system,Segoe UI,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";
+    background: none; /* 背景は擬似要素に任せる */
   }
-  img{max-width:100%; display:block}
-  a{color:inherit}
+  
+  /* ★ フルスクリーン背景写真（固定） */
+  body::before{
+    content:"";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background: url("../public/assets/hero.jpg") center / cover no-repeat;
+    /* iOS対策 & パフォーマンス */
+    transform: translateZ(0);
+    will-change: transform;
+  }
+  
+  /* ★ 薄い白ベールで可読性UP（減らしたいなら不透明度を下げる） */
+  body::after{
+    content:"";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: rgba(255,255,255, .68);
+  }
   
   /* =========================
      Header / Nav
@@ -32,9 +58,10 @@
   .site-header{
     position:sticky; top:0; z-index:50;
     display:flex; align-items:center; justify-content:space-between;
-    height:var(--header-h); padding:0 var(--space-4);
+    height:var(--header-h);
+    padding-inline: var(--page-pad);
     border-bottom:1px solid var(--line);
-    background:color-mix(in srgb, var(--bg) 85%, transparent);
+    background: color-mix(in srgb, rgba(255,255,255,.85) 100%, transparent);
     backdrop-filter:saturate(1.1) blur(8px);
   }
   .brand{font-weight:700; letter-spacing:.04em; text-decoration:none}
@@ -52,17 +79,14 @@
   .nav a.is-active, .nav a:hover{
     background:var(--accent); color:var(--accent-ink);
   }
-  .ghost-btn{
-    border:1px solid var(--line); border-radius:999px; padding:8px 14px; text-decoration:none;
-  }
   
   /* モバイル */
   @media (max-width: 900px){
     .hamburger{display:inline-block}
     .nav{
-      position:absolute; right:12px; top:calc(var(--header-h) - 2px);
+      position:absolute; right:var(--page-pad); top:calc(var(--header-h) - 2px);
       flex-direction:column; align-items:stretch; gap:6px;
-      background:var(--bg); border:1px solid var(--line);
+      background:#ffffff; border:1px solid var(--line);
       border-radius:12px; padding:8px; display:none;
     }
     .nav.is-open{display:flex}
@@ -72,10 +96,15 @@
      Sections / Common
      ========================= */
   .section{
-    padding:var(--space-16) var(--space-4);
+    /* 横の余白は container 側で担保。ここは上下だけ */
+    padding-block: var(--space-16);
     scroll-margin-top:calc(var(--header-h) + 16px);
   }
-  .container{max-width:var(--max-w); margin:0 auto}
+  .container{
+    max-width: var(--content-max);
+    margin: 0 auto;
+    padding-inline: var(--page-pad); /* ★ 左右余白を常に確保 */
+  }
   .section-title{
     text-align:center; font-size:clamp(28px,4vw,42px); margin:0 0 var(--space-12);
   }
@@ -83,18 +112,18 @@
     content:""; display:block; width:120px; height:4px; margin:12px auto 0;
     background:var(--accent); border-radius:2px;
   }
-  
+
   /* =========================
      About
      ========================= */
   .grid-2{
-    display:grid; grid-template-columns: 1fr 1.4fr; gap:var(--space-12);
+    display:grid; grid-template-columns: 1fr 1.2fr; gap:var(--space-12);
   }
   .about-photo{
     display:flex; justify-content:center; align-items:flex-start;
   }
   .about-photo img{
-    width:min(320px, 80%); aspect-ratio:1/1; object-fit:cover;
+    width:min(300px, 80%); aspect-ratio:1/1; object-fit:cover;
     border-radius:999px; border:8px solid #fff; box-shadow:0 5px 30px rgba(0,0,0,.08);
   }
   .about-text{align-self:center}
@@ -107,54 +136,66 @@
     .about-text{justify-self:center}
   }
   
-  /* =========================
-     Service (Works)
-     ========================= */
-  .work-row{
-    display:grid; grid-template-columns: 1.1fr 1fr; gap:var(--space-12);
+/* ===== Service (Works) ===== */
+.work-row{
+    /* 画像が大きくなりすぎないよう、比率を少しテキスト寄りに */
+    display:grid; grid-template-columns: 1.1fr 0.9fr;
+    gap:var(--space-12);
     align-items:center; margin-bottom:var(--space-16);
   }
-  .work-row.reverse{ grid-template-columns: 1fr 1.1fr }
+  .work-row.reverse{ grid-template-columns: 0.9fr 1.1fr }
   .work-row.reverse .work-text{ order:2 }
   .work-row.reverse .work-image{ order:1 }
   
-  .work-title{font-size:clamp(22px,2.8vw,30px); margin:0 0 var(--space-3)}
-  .work-desc{margin:0; color:#505050}
+  /* 画像サイズを控えめに。中央寄せ＆最大幅を制限 */
+  .work-image{ display:flex; justify-content:center; }
   .work-image img{
+    width: 100%;
+    max-width: clamp(320px, 42vw, 520px); /* ★ ここで“画面に対して控えめ”を担保 */
+    height: auto;
     border-radius:12px; box-shadow:0 10px 40px rgba(0,0,0,.10);
   }
   
+  .work-title{font-size:clamp(22px,2.8vw,30px); margin:0 0 var(--space-3)}
+  .work-desc{margin:0; color:#505050}
+  
   @media (max-width: 900px){
-    .work-row, .work-row.reverse{
-      grid-template-columns: 1fr;
-    }
+    .work-row, .work-row.reverse{ grid-template-columns: 1fr; }
+    .work-image img{ max-width: 100%; }
   }
   
-  /* =========================
-     Skill
-     ========================= */
+  /* ===== Skill ===== */
   .skill-grid{
     display:grid; grid-template-columns: repeat(3, 1fr);
     gap:var(--space-8);
   }
   .skill-card{
+    display:flex; flex-direction:column;
     border:1px solid var(--line); border-radius:var(--radius);
     overflow:hidden; background:#fff;
   }
-  .skill-image img{width:100%; height:260px; object-fit:cover}
+  
+  /* 画像は常に正方形 */
+  .skill-image{ position: relative; }
+  .skill-image img{
+    width:100%;
+    aspect-ratio: 1 / 1;       /* ★ 正方形サムネ */
+    height:auto;
+    object-fit: cover;         /* 中央トリミング */
+  }
   .skill-title{margin:var(--space-4) var(--space-4) var(--space-2); font-size:20px}
   .skill-body{margin:0 var(--space-4) var(--space-6); color:#505050}
   
   @media (max-width: 900px){
     .skill-grid{grid-template-columns: 1fr}
-    .skill-image img{height:220px}
   }
   
-  /* =========================
-     History (Timeline)
-     ========================= */
+  /* ===== History (Timeline) ===== */
+  /* .timeline は .container の内側に置く前提に変更（左右余白が必ず効く） */
   .timeline{
-    position:relative; margin-left:8px; padding-left:18px;
+    position:relative;
+    margin-left:8px;           /* 軽い余白のみ */
+    padding-left:18px;
   }
   .timeline::before{
     content:""; position:absolute; left:0; top:0; bottom:0; width:2px; background:var(--line);
@@ -172,6 +213,7 @@
   @media (max-width: 600px){
     .timeline-item{grid-template-columns: 62px 20px 1fr}
   }
+  
   
   /* =========================
      Contact
@@ -201,7 +243,7 @@
      ========================= */
   .site-footer{
     border-top:1px solid var(--line);
-    text-align:center; color:var(--muted);
+    text-align:center; color:#5f6673;
     padding:var(--space-6);
   }
   

@@ -16,7 +16,7 @@ export default function App() {
         <History />
         <Contact />
       </main>
-      <footer className="site-footer">© {new Date().getFullYear()} Your Name</footer>
+      <footer className="site-footer">© {new Date().getFullYear()} Riku Shibasaki</footer>
     </>
   );
 }

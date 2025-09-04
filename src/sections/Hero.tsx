@@ -1,3 +1,5 @@
+import heroImage from '../assets/hero.jpg';
+
 export default function Hero() {
-  return <section className="hero" aria-label="cover image" />;
+  return <section className="hero" style={{ backgroundImage: `url(${heroImage})` }} />;
 }

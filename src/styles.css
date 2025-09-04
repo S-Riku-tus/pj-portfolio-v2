@@ -37,7 +37,7 @@
     position: fixed;
     inset: 0;
     z-index: -2;
-    background: url("../public/assets/hero.jpg") center / cover no-repeat;
+    background: var(--hero-bg-image) center / cover no-repeat;
     /* iOS対策 & パフォーマンス */
     transform: translateZ(0);
     will-change: transform;

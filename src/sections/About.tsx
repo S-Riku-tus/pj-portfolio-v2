@@ -1,3 +1,5 @@
+import profileImage from '../assets/profile.jpg';
+
 export default function About() {
     return (
       <section id="about" className="section">
@@ -5,8 +7,8 @@ export default function About() {
   
         <div className="container grid-2">
           <div className="about-photo">
-            {/* 画像は public/assets/ に置く */}
-            <img src="/assets/profile.jpg" alt="profile" />
+            {/* 画像は src/assets/ に置く */}
+            <img src={profileImage} alt="profile" />
           </div>
   
           <div className="about-text">

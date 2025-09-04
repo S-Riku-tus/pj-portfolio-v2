@@ -1,3 +1,12 @@
+import pythonLogo from '../assets/python-logo-only.svg';
+import cImage from '../assets/c.jpg';
+import typescriptLogo from '../assets/typescript.svg';
+import sqlLogo from '../assets/sql.svg';
+import htmlLogo from '../assets/html.webp';
+import cssLogo from '../assets/css.webp';
+import javascriptLogo from '../assets/javascript.webp';
+import atcoderLogo from '../assets/atcoder.png';
+
 function SkillCard({
     image,
     title,
@@ -23,28 +32,28 @@ function SkillCard({
       <section id="skill" className="section">
         <h2 className="section-title">Skill</h2>
         <div className="container skill-grid">
-          <SkillCard image="public\assets\python-logo-only.svg" title="Python：1年半">
+          <SkillCard image={pythonLogo} title="Python：1年半">
             #AI  #機械学習  #生成AI  #Django  #Flask  #FastAPI  #OpenCV  #NumPy  #Pandas  #PyTorch
           </SkillCard>
-          <SkillCard image="public\assets\c.jpg" title="C：1年">
+          <SkillCard image={cImage} title="C：1年">
             #大学の講義
           </SkillCard>
-          <SkillCard image="public\assets\typescript.svg" title="TypeScript：3カ月">
+          <SkillCard image={typescriptLogo} title="TypeScript：3カ月">
             #React  #Next.js  #Vite  #Node.js  #TailwindCSS
           </SkillCard>
-          <SkillCard image="public\assets\sql.svg" title="SQL：3カ月">
+          <SkillCard image={sqlLogo} title="SQL：3カ月">
             #SQLite  #PostgreSQL  #MySQL
           </SkillCard>
-          <SkillCard image="public\assets\html.webp" title="HTML：2カ月">
+          <SkillCard image={htmlLogo} title="HTML：2カ月">
             #何が入るかわからない
           </SkillCard>
-          <SkillCard image="public\assets\css.webp" title="CSS：2カ月">
+          <SkillCard image={cssLogo} title="CSS：2カ月">
             #何が入るかわからない
           </SkillCard>
-          <SkillCard image="public\assets\javascript.webp" title="JavaScript：2カ月">
+          <SkillCard image={javascriptLogo} title="JavaScript：2カ月">
             #何が入るかわからない
           </SkillCard>
-          <SkillCard image="public\assets\atcoder.png" title="AtCoder：7カ月">
+          <SkillCard image={atcoderLogo} title="AtCoder：7カ月">
             #茶色  #
             <a
             href="https://atcoder.jp/users/rsraki"

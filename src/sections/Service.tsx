@@ -1,5 +1,11 @@
 // src/sections/Service.tsx
+import arxivBotImage from '../assets/arxiv_bot.png';
+import arxivBotVideo from '../assets/arxiv_bot.mp4';
+import tetrisImage from '../assets/tetris.png';
+import tetrisVideo from '../assets/tetris.mp4';
+
 type VideoSource = { src: string; type: string };
+type ExtraLink = { label: string; href: string; variant: "solid" | "outline" };
 
 function WorkRow({
   title,
@@ -99,10 +105,10 @@ export default function Service() {
         <WorkRow
           title="arXiv 論文通知 Slack Bot"
           desc="arXivから生成AIに関連する最新論文を毎朝Slackに通知するBot。Python, Flaskで実装し、Github Actionsで定期実行している。"
-          videoPoster="public/assets/arxiv_bot.png"
+          videoPoster={arxivBotImage}
           videoSources={[
             { src: "/media/todo.webm", type: "video/webm" },
-            { src: "public/assets/arxiv_bot.mp4", type: "video/mp4" }, // Safari 向け（H.264）
+            { src: arxivBotVideo, type: "video/mp4" }, // Safari 向け（H.264）
           ]}
           githubUrl="https://github.com/S-Riku-tus/pj-ai_arXiv_bot"
           extraLinks={[
@@ -113,10 +119,10 @@ export default function Service() {
         <WorkRow
           title="Tetris"
           desc="GPT Enginnerを用いて作成。これをきっかけにプログラミングに目覚めた。JavaScript, HTML, CSSで実装。"
-          videoPoster="public/assets/tetris.png"
+          videoPoster={tetrisImage}
           videoSources={[
             { src: "/media/todo.webm", type: "video/webm" },
-            { src: "public/assets/tetris.mp4", type: "video/mp4" }, // Safari 向け（H.264）
+            { src: tetrisVideo, type: "video/mp4" }, // Safari 向け（H.264）
           ]}
           githubUrl="https://github.com/S-Riku-tus/Tetris"
           extraLinks={[

@@ -203,31 +203,62 @@
     box-shadow:0 10px 40px rgba(0,0,0,.10);
   }
 
-  /* ===== Skill ===== */
+  /* ==== Skill==== */
+
+  /* 列数は前回の2列のまま（横長の印象をキープ） */
   .skill-grid{
-    display:grid; grid-template-columns: repeat(3, 1fr);
-    gap:var(--space-8);
+    display:grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-8);
   }
+
   .skill-card{
     display:flex; flex-direction:column;
     border:1px solid var(--line); border-radius:var(--radius);
     overflow:hidden; background:#fff;
   }
-  
-  /* 画像は常に正方形 */
-  .skill-image{ position: relative; }
-  .skill-image img{
+
+  /* 比率は“枠”で管理。デフォは 1:1（正方形元画像が切れない） */
+  :root{
+    --skill-image-ar: 4 / 3;      /* 横長にしたいなら 4 / 3 や 16 / 9 に変更 */
+    --skill-media-inset: 6%;      /* 枠の内側に入れる余白（ゆとり）。5〜8%が目安 */
+  }
+
+  /* 画像枠：比率を確保（擬似要素で高さを作る） */
+  .skill-image{
+    position: relative;
+    background:#fff;              /* 背景が見える＝“ゆとり”が視覚化される */
+    border-bottom:1px solid var(--line);
+  }
+  .skill-image::before{
+    content:"";
+    display:block;
+    aspect-ratio: var(--skill-image-ar);
     width:100%;
-    aspect-ratio: 1 / 1;       /* ★ 正方形サムネ */
-    height:auto;
-    object-fit: cover;         /* 中央トリミング */
   }
-  .skill-title{margin:var(--space-4) var(--space-4) var(--space-2); font-size:20px}
-  .skill-body{margin:0 var(--space-4) var(--space-6); color:#505050}
-  
+
+  /* 中の img は“contain”（切らない）。枠の内側にインセットして余白を作る */
+  .skill-image img{
+    position:absolute;
+    inset: var(--skill-media-inset);
+    width: calc(100% - 2 * var(--skill-media-inset));
+    height: calc(100% - 2 * var(--skill-media-inset));
+    object-fit: contain;          /* ← トリミングしない */
+    border-radius: 10px;          /* わずかに角を丸めて上質感 */
+    background: #fff;             /* 透過PNGでも下が白で安定 */
+  }
+
+  /* タイトル・本文は従来通り */
+  .skill-title{ margin:var(--space-4) var(--space-4) var(--space-2); font-size:20px }
+  .skill-body { margin:0 var(--space-4) var(--space-6); color:#505050 }
+
+  /* スマホは1列。インセットを少し弱めて画像が小さくなりすぎないように調整してもOK */
   @media (max-width: 900px){
-    .skill-grid{grid-template-columns: 1fr}
+    .skill-grid{ grid-template-columns: 1fr; }
+    /* 例：スマホは余白を5%に */
+    /* .skill-image img{ inset: 5%; width: calc(100% - 10%); height: calc(100% - 10%); } */
   }
+
   
   /* ===== History (Timeline) ===== */
   /* .timeline は .container の内側に置く前提に変更（左右余白が必ず効く） */

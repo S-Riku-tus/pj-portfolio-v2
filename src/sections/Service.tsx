@@ -9,6 +9,7 @@ function WorkRow({
   videoSources,
   githubUrl,
   demoUrl,
+  extraLinks = [],
   reverse = false,
 }: {
   title: string;
@@ -18,6 +19,7 @@ function WorkRow({
   videoSources?: VideoSource[];   // 動画で見せる場合（webm/mp4 など複数可）
   githubUrl?: string;
   demoUrl?: string;
+  extraLinks?: ExtraLink[];
   reverse?: boolean;
 }) {
   const Media = () =>
@@ -67,6 +69,17 @@ function WorkRow({
                 GitHub Link
               </a>
             )}
+            {extraLinks.map((l, i) => (
+              <a
+                key={i}
+                className={l.variant === "solid" ? "btn" : "btn-outline"}
+                href={l.href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {l.label}
+              </a>
+            ))}
           </div>
         )}
       </div>
@@ -83,28 +96,32 @@ export default function Service() {
     <section id="service" className="section">
       <h2 className="section-title">Service</h2>
       <div className="container">
-        {/* 例1：動画で見せる（webm + mp4 を両方用意すると互換性◎） */}
         <WorkRow
           title="arXiv 論文通知 Slack Bot"
           desc="arXivから生成AIに関連する最新論文を毎朝Slackに通知するBot。Python, Flaskで実装し、Github Actionsで定期実行している。"
-          videoPoster="../../public/assets/arxiv_bot.png"
+          videoPoster="public/assets/arxiv_bot.png"
           videoSources={[
             { src: "/media/todo.webm", type: "video/webm" },
-            { src: "../../public/assets/arxiv_bot.mp4", type: "video/mp4" }, // Safari 向け（H.264）
+            { src: "public/assets/arxiv_bot.mp4", type: "video/mp4" }, // Safari 向け（H.264）
           ]}
           githubUrl="https://github.com/S-Riku-tus/pj-ai_arXiv_bot"
+          extraLinks={[
+            { label: "Qiita記事", href: "https://qiita.com/banksline_tus/items/7577dfe3467f9d762195", variant: "outline" },
+          ]}
         />
 
-        {/* 例2：画像で見せる */}
         <WorkRow
           title="Tetris"
           desc="GPT Enginnerを用いて作成。これをきっかけにプログラミングに目覚めた。JavaScript, HTML, CSSで実装。"
-          videoPoster="../../public/assets/tetris.png"
+          videoPoster="public/assets/tetris.png"
           videoSources={[
             { src: "/media/todo.webm", type: "video/webm" },
-            { src: "../../public/assets/tetris.mp4", type: "video/mp4" }, // Safari 向け（H.264）
+            { src: "public/assets/tetris.mp4", type: "video/mp4" }, // Safari 向け（H.264）
           ]}
           githubUrl="https://github.com/S-Riku-tus/Tetris"
+          extraLinks={[
+            { label: "ゲーム開始→", href: "https://tetris-iota-mauve.vercel.app/", variant: "outline" },
+          ]}
           reverse
         />
       </div>

@@ -52,7 +52,7 @@ function SkillCard({
             rel="noopener noreferrer"
             className="inline-link"
           >
-            AtCoder Profile
+            AtCoder Link
           </a>
           </SkillCard>
         </div>

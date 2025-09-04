@@ -252,6 +252,21 @@
   .skill-title{ margin:var(--space-4) var(--space-4) var(--space-2); font-size:20px }
   .skill-body { margin:0 var(--space-4) var(--space-6); color:#505050 }
 
+  /* Skill 本文内のテキストリンク */
+  .skill-body a,
+  .inline-link {
+    color: #505050;                 /* 水色アクセント */
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-thickness: 1px;
+    transition: color .15s ease, text-decoration-thickness .15s ease;
+  }
+
+  .skill-body a:hover,
+  .inline-link:hover {
+    color: #505050c7;             /* 少し濃い色に */
+    text-decoration-thickness: 2px;
+  }
   /* スマホは1列。インセットを少し弱めて画像が小さくなりすぎないように調整してもOK */
   @media (max-width: 900px){
     .skill-grid{ grid-template-columns: 1fr; }
@@ -317,4 +332,59 @@
     text-align:center; color:#5f6673;
     padding:var(--space-6);
   }
-  
+
+  /* =========================
+   Inline Emphasis Utilities
+   ========================= */
+
+  /* トークン（既存のカラースキームと整合） */
+  :root{
+    --em-ink: var(--accent-ink);                         /* 文字色（濃い青緑） */
+    --em-bg: color-mix(in srgb, var(--accent) 22%, #fff);/* 背景に淡いアクア */
+    --em-outline: color-mix(in srgb, var(--em-ink) 12%, transparent);
+  }
+
+  /* セマンティクス優先：strong/em/mark を少しだけ強調 */
+  :where(.section, .work-desc, .skill-body, .lead) strong{
+    font-weight: 800;
+  }
+  :where(.section, .work-desc, .skill-body, .lead) em{
+    font-style: italic;
+  }
+  :where(.section, .work-desc, .skill-body, .lead) mark{
+    background: var(--em-bg);
+    color: var(--em-ink);
+    padding: 0 .25em;
+    border-radius: 4px;
+  }
+
+  /* 実用ユーティリティ：色付き強調（背景あり） */
+  .em{
+    color: var(--em-ink);
+    background: var(--em-bg);
+    padding: 0 .25em;
+    border-radius: 6px;
+    box-shadow: 0 0 0 1px var(--em-outline) inset;
+  }
+
+  /* 色付き強調（背景なしで文字色だけ） */
+  .em-clean{
+    color: #f87a48;
+    font-weight: 700;
+  }
+
+  /* 補助：薄い文字・下線・キーボード表記・小バッジ */
+  .muted{ color: var(--muted); }
+  .u{ color: #e4622e; text-decoration: underline; text-underline-offset: 2px; }
+  .kbd{
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    font-size: .92em;
+    background: #f3f4f6; border: 1px solid var(--line);
+    border-radius: 6px; padding: 0 .35em;
+  }
+  .badge{
+    display: inline-block; line-height: 1.8;
+    padding: 0 .6em; border-radius: 999px;
+    background: var(--accent-weak); color: var(--accent-ink);
+    border: 1px solid var(--line);
+  }

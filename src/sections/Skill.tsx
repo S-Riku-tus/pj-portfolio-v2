@@ -44,6 +44,17 @@ function SkillCard({
           <SkillCard image="public\assets\javascript.webp" title="JavaScript：2カ月">
             #何が入るかわからない
           </SkillCard>
+          <SkillCard image="public\assets\atcoder.png" title="AtCoder：7カ月">
+            #茶色  #
+            <a
+            href="https://atcoder.jp/users/rsraki"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-link"
+          >
+            AtCoder Profile
+          </a>
+          </SkillCard>
         </div>
       </section>
     );

@@ -1,6 +1,8 @@
 name: Deploy to GitHub Pages
+
 on:
-  push: { branches: [ main ] }
+  push:
+    branches: [ main ]
   workflow_dispatch:
 
 permissions:
@@ -9,7 +11,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: 'pages'
+  group: "pages"
   cancel-in-progress: true
 
 jobs:
@@ -26,12 +28,14 @@ jobs:
       - run: npm ci
       - run: npm run build
 
+      - run: touch dist/.nojekyll
+
       - run: |
           echo '--- dist listing ---'
           ls -la dist
           echo '--- index.html head ---'
           sed -n '1,60p' dist/index.html
-          echo '--- searching for /src/main.tsx (should be none) ---'
+          echo '--- search for /src/main.tsx (should be none) ---'
           ! grep -R "/src/main.tsx" -n dist && echo "OK: no dev script found"
 
       - uses: actions/upload-pages-artifact@v3
